@@ -20,6 +20,12 @@ const App = () => {
     setHasConfirmed(true);
   };
 
+  const handleEdit = () => {
+    setIsValid(false);
+    setHasConfirmed(false);
+  };
+  
+
   const handlePlayAgain = () => {
     setWantsPlayAgain(true);
     setIsValid(false);
@@ -33,10 +39,10 @@ const App = () => {
     setWantsPlayAgain(false);
   };
 
-  let content = <StartScreen onStart={handleStart} onReset={handleReset} />;
+  let content = <StartScreen userData={userData} onStart={handleStart} onReset={handleReset} />;
 
   if (isValid && !hasConfirmed) {
-    content = <ConfirmScreen onConfirm={handleConfirm} userData={userData} />;
+    content = <ConfirmScreen onEdit={handleEdit} onConfirm={handleConfirm} userData={userData} />;
   } else if (hasConfirmed || wantsPlayAgain) {
     content = <GameScreen onPlayAgain={handlePlayAgain} />;
   }

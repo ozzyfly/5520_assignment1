@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
 import Card from '../components/Card';
 
-const StartScreen = ({ onStart, onReset }) => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
+const StartScreen = ({ onStart, onReset, userData }) => {
+  const [name, setName] = useState(userData.name);
+  const [email, setEmail] = useState(userData.email);
+  const [phoneNumber, setPhoneNumber] = useState(userData.phoneNumber);
   const [checkboxSelected, setCheckboxSelected] = useState(false);
   const [errors, setErrors] = useState({ name: '', email: '', phoneNumber: '' });
 
@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 20,
+    justifyContent: 'center',
   }
 });
 
