@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, Button, Image, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button, Image, StyleSheet, Modal } from 'react-native';
 import Card from '../components/Card';
 
 const GameScreen = ({ onLogout }) => {
@@ -8,6 +8,7 @@ const GameScreen = ({ onLogout }) => {
   const [attemptCount, setAttemptCount] = useState(0);
   const [isGuessCorrect, setIsGuessCorrect] = useState(false);
   const [feedback, setFeedback] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
 
   function generateRandom() {
     return Math.floor(Math.random() * (20 - 10 + 1)) + 10;
@@ -26,8 +27,10 @@ const GameScreen = ({ onLogout }) => {
       setFeedback('');
     } else if (guess < generatedNumber) {
       setFeedback('Your guess is too low!');
+      setModalVisible(true);
     } else {
       setFeedback('Your guess is too high!');
+      setModalVisible(true);
     }
   };
 
@@ -37,6 +40,10 @@ const GameScreen = ({ onLogout }) => {
     setAttemptCount(0);
     setGeneratedNumber(generateRandom());
     setFeedback('');
+  };
+
+  const handleResetInput = () => {
+    setUserGuess('');
   };
 
   return (
@@ -53,15 +60,28 @@ const GameScreen = ({ onLogout }) => {
               keyboardType="numeric"
               style={styles.input}
             />
-            <Button title="Confirm" onPress={handleConfirm} />
+            <View style={styles.buttonContainer}>
+              <Button title="Confirm" onPress={handleConfirm} />
+              <Button title="Reset" onPress={handleResetInput} />
+            </View>
             <Text>{feedback}</Text>
 
-            {feedback && attemptCount > 0 && !isGuessCorrect ? (
-              <View>
-                <Image source={require('../assets/a_sad_smiley_face.jpg')} style={styles.image} />
-                <Text>Try Again!</Text>
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={modalVisible}
+              onRequestClose={() => {
+                setModalVisible(false);
+              }}
+            >
+              <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                  <Image source={require('../assets/a_sad_smiley_face.jpg')} style={styles.image} />
+                  <Text>{feedback}</Text>
+                  <Button title="Try Again!" onPress={() => setModalVisible(false)} />
+                </View>
               </View>
-            ) : null}
+            </Modal>
           </>
         ) : (
           <View>
@@ -93,6 +113,33 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     marginVertical: 10,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    width: '100%',
+    marginTop: 10,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
   },
 });
 
