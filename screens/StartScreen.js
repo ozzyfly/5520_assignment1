@@ -76,7 +76,7 @@ const StartScreen = ({ onStart, onReset, userData }) => {
         {errors.phoneNumber && <Text style={styles.errorText}>{errors.phoneNumber}</Text>}
 
         <View style={styles.checkboxContainer}>
-          <Button title="Checkbox" onPress={() => setCheckboxSelected(!checkboxSelected)} />
+          <Button title="I am not a robot" onPress={() => setCheckboxSelected(!checkboxSelected)} />
           <Text>{checkboxSelected ? '✅' : '❌'}</Text>
         </View>
 
