@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
 import Card from '../components/Card';
 
 const StartScreen = ({ onStart, onReset }) => {
@@ -33,6 +33,14 @@ const StartScreen = ({ onStart, onReset }) => {
     return isValid;
   };
 
+  const handleReset = () => {
+    setName('');
+    setEmail('');
+    setPhoneNumber('');
+    setCheckboxSelected(false);
+    setErrors({ name: '', email: '', phoneNumber: '' });
+  };
+
   const handleStart = () => {
     if (validateInput()) {
       const userData = { name, email, phoneNumber };
@@ -41,7 +49,7 @@ const StartScreen = ({ onStart, onReset }) => {
   };
 
   return (
-    <View style={styles.screen}>
+    <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.screen}>
       <Card>
         <Text>Name</Text>
         <TextInput 
@@ -67,11 +75,15 @@ const StartScreen = ({ onStart, onReset }) => {
         />
         {errors.phoneNumber && <Text style={styles.errorText}>{errors.phoneNumber}</Text>}
 
-        <Button title="Checkbox (for simplicity)" onPress={() => setCheckboxSelected(!checkboxSelected)} />
-        <Button title="Reset" onPress={onReset} />
+        <View style={styles.checkboxContainer}>
+          <Button title="Checkbox" onPress={() => setCheckboxSelected(!checkboxSelected)} />
+          <Text>{checkboxSelected ? '✅' : '❌'}</Text>
+        </View>
+
+        <Button title="Reset" onPress={handleReset} />
         <Button title="Start" onPress={handleStart} disabled={!checkboxSelected} />
       </Card>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -79,7 +91,7 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
+    // alignItems: 'center',
   },
   input: {
     width: '80%',
@@ -91,6 +103,11 @@ const styles = StyleSheet.create({
     color: 'red',
     marginBottom: 10,
   },
+  checkboxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
+  }
 });
 
 export default StartScreen;
