@@ -7,15 +7,27 @@ const GameScreen = ({ onLogout }) => {
   const [userGuess, setUserGuess] = useState('');
   const [attemptCount, setAttemptCount] = useState(0);
   const [isGuessCorrect, setIsGuessCorrect] = useState(false);
+  const [feedback, setFeedback] = useState('');
 
   function generateRandom() {
     return Math.floor(Math.random() * (20 - 10 + 1)) + 10;
   }
 
   const handleConfirm = () => {
+    const guess = parseInt(userGuess);
+    if (isNaN(guess) || guess < 10 || guess > 20) {
+      setFeedback('Please enter a valid number between 10 and 20.');
+      return;
+    }
+
     setAttemptCount(attemptCount + 1);
-    if (parseInt(userGuess) === generatedNumber) {
+    if (guess === generatedNumber) {
       setIsGuessCorrect(true);
+      setFeedback('');
+    } else if (guess < generatedNumber) {
+      setFeedback('Your guess is too low!');
+    } else {
+      setFeedback('Your guess is too high!');
     }
   };
 
@@ -24,6 +36,7 @@ const GameScreen = ({ onLogout }) => {
     setUserGuess('');
     setAttemptCount(0);
     setGeneratedNumber(generateRandom());
+    setFeedback('');
   };
 
   return (
@@ -41,8 +54,9 @@ const GameScreen = ({ onLogout }) => {
               style={styles.input}
             />
             <Button title="Confirm" onPress={handleConfirm} />
+            <Text>{feedback}</Text>
 
-            {parseInt(userGuess) !== generatedNumber && attemptCount > 0 ? (
+            {feedback && attemptCount > 0 && !isGuessCorrect ? (
               <View>
                 <Image source={require('../assets/a_sad_smiley_face.jpg')} style={styles.image} />
                 <Text>Try Again!</Text>
