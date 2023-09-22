@@ -44,8 +44,9 @@ const App = () => {
   if (isValid && !hasConfirmed) {
     content = <ConfirmScreen onEdit={handleEdit} onConfirm={handleConfirm} userData={userData} />;
   } else if (hasConfirmed || wantsPlayAgain) {
-    content = <GameScreen onPlayAgain={handlePlayAgain} />;
+    content = <GameScreen onPlayAgain={handlePlayAgain} onLogout={handleReset} />;
   }
+  
 
   return <View style={styles.screen}>{content}</View>;
 };
