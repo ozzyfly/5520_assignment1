@@ -1,46 +1,29 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, Button, StyleSheet } from 'react-native';
 import Card from '../components/Card';
-import CustomButton from '../components/CustomButton';
-import GradientBackground from '../components/GradientBackground';
 
-const ConfirmScreen = ({ route, navigation }) => {
-  const { name, email, phoneNumber } = route.params;
-
+const ConfirmScreen = ({ userData, onEdit, onConfirm }) => {
   return (
-    <GradientBackground>
+    <View style={styles.screen}>
       <Card>
-        <Text style={styles.label}>Name:</Text>
-        <Text style={styles.data}>{name}</Text>
-
-        <Text style={styles.label}>Email:</Text>
-        <Text style={styles.data}>{email}</Text>
-
-        <Text style={styles.label}>Phone Number:</Text>
-        <Text style={styles.data}>{phoneNumber}</Text>
+        <Text>Name: {userData.name}</Text>
+        <Text>Email: {userData.email}</Text>
+        <Text>Phone Number: {userData.phoneNumber}</Text>
 
         <View style={styles.buttonContainer}>
-          <CustomButton
-            title="Edit"
-            onPress={() => navigation.goBack()}
-          />
-          <CustomButton
-            title="Confirm"
-            onPress={() => navigation.navigate('GameScreen')}
-          />
+          <Button title="Edit" onPress={onEdit} />
+          <Button title="Confirm" onPress={onConfirm} />
         </View>
       </Card>
-    </GradientBackground>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  label: {
-    fontWeight: 'bold',
-    marginTop: 10,
-  },
-  data: {
-    marginBottom: 15,
+  screen: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   buttonContainer: {
     flexDirection: 'row',
