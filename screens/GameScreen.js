@@ -52,9 +52,8 @@ const GameScreen = ({ onLogout }) => {
   };
 
   return (
-    <View style={screen}>
+    <View style={styles.screen}>
       <CustomButton title="Logout" onPress={onLogout} style={logoutButton} />
-
       <Card>
         {!isGuessCorrect ? (
           <>
