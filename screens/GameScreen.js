@@ -62,7 +62,8 @@ const GameScreen = ({ onLogout }) => {
               value={userGuess} 
               onChangeText={setUserGuess} 
               keyboardType="numeric"
-              style={input}
+              placeholder="Enter your guess here"  
+              style={[input, !isNaN(userGuess) && userGuess >= 10 && userGuess <= 20 ? {} : {borderColor: 'red'}]}  
             />
             <View style={buttonContainer}>
               <CustomButton title="Confirm" onPress={handleConfirm} />
@@ -113,6 +114,10 @@ const styles = StyleSheet.create({
   },
   input: {
     marginVertical: 10,
+    borderWidth: 1,  
+    borderColor: 'grey',  
+    padding: 8,  
+    borderRadius: 5,  
   },
   image: {
     width: 100,
