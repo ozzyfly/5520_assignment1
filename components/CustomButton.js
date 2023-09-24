@@ -1,14 +1,16 @@
 import React from 'react';
-import { Button, StyleSheet } from 'react-native';
+import { Button, StyleSheet, View } from 'react-native';
 
-const CustomButton = (props) => {
-  return <Button {...props} style={{ ...styles.button, ...props.style }} />;
-};
+const CustomButton = ({ style, ...otherProps }) => (
+  <View style={[styles.buttonContainer, style]}>
+    <Button {...otherProps} />
+  </View>
+);
 
 const styles = StyleSheet.create({
-  button: {
-    borderRadius: 10,
-    // customize further
+  buttonContainer: {
+    borderRadius: 20,
+    overflow: 'hidden',
   },
 });
 

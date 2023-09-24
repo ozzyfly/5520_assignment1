@@ -1,18 +1,19 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import Card from '../components/Card';
+import CustomButton from '../components/CustomButton'; 
 
-const ConfirmScreen = ({ userData, onEdit, onConfirm }) => {
+const ConfirmScreen = ({ userData: { name, email, phoneNumber }, onEdit, onConfirm }) => {
   return (
     <View style={styles.screen}>
       <Card>
-        <Text>Name: {userData.name}</Text>
-        <Text>Email: {userData.email}</Text>
-        <Text>Phone Number: {userData.phoneNumber}</Text>
+        <Text>Name: {name}</Text>
+        <Text>Email: {email}</Text>
+        <Text>Phone Number: {phoneNumber}</Text>
 
         <View style={styles.buttonContainer}>
-          <Button title="Edit" onPress={onEdit} />
-          <Button title="Confirm" onPress={onConfirm} />
+          <CustomButton title="Edit" onPress={onEdit} style={styles.editButton} />
+          <CustomButton title="Confirm" onPress={onConfirm} style={styles.confirmButton} />
         </View>
       </Card>
     </View>
@@ -29,6 +30,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 20,
+  },
+  editButton: {
+    marginRight: 10, // adds a margin to separate the buttons
+  },
+  confirmButton: {
+    marginLeft: 10, // adds a margin to separate the buttons
   },
 });
 

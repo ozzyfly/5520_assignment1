@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Image, StyleSheet, Modal } from 'react-native';
+import { View, Text, TextInput, Image, StyleSheet, Modal } from 'react-native';
 import Card from '../components/Card';
+import CustomButton from '../components/CustomButton'; 
+
 
 const GameScreen = ({ onLogout }) => {
   const [generatedNumber, setGeneratedNumber] = useState(generateRandom());
@@ -9,6 +11,9 @@ const GameScreen = ({ onLogout }) => {
   const [isGuessCorrect, setIsGuessCorrect] = useState(false);
   const [feedback, setFeedback] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
+
+  const { screen, logoutButton, input, image, buttonContainer, centeredView, modalView } = styles;
+
 
   function generateRandom() {
     return Math.floor(Math.random() * (20 - 10 + 1)) + 10;
@@ -47,8 +52,8 @@ const GameScreen = ({ onLogout }) => {
   };
 
   return (
-    <View style={styles.screen}>
-      <Button title="Logout" onPress={onLogout} style={styles.logoutButton} />
+    <View style={screen}>
+      <CustomButton title="Logout" onPress={onLogout} style={logoutButton} />
 
       <Card>
         {!isGuessCorrect ? (
@@ -58,11 +63,11 @@ const GameScreen = ({ onLogout }) => {
               value={userGuess} 
               onChangeText={setUserGuess} 
               keyboardType="numeric"
-              style={styles.input}
+              style={input}
             />
-            <View style={styles.buttonContainer}>
-              <Button title="Confirm" onPress={handleConfirm} />
-              <Button title="Reset" onPress={handleResetInput} />
+            <View style={buttonContainer}>
+              <CustomButton title="Confirm" onPress={handleConfirm} />
+              <CustomButton title="Reset" onPress={handleResetInput} />
             </View>
             <Text>{feedback}</Text>
 
@@ -74,11 +79,11 @@ const GameScreen = ({ onLogout }) => {
                 setModalVisible(false);
               }}
             >
-              <View style={styles.centeredView}>
-                <View style={styles.modalView}>
-                  <Image source={require('../assets/a_sad_smiley_face.jpg')} style={styles.image} />
+              <View style={centeredView}>
+                <View style={modalView}>
+                  <Image source={require('../assets/a_sad_smiley_face.jpg')} style={image} />
                   <Text>{feedback}</Text>
-                  <Button title="Try Again!" onPress={() => setModalVisible(false)} />
+                  <CustomButton title="Try Again!" onPress={() => setModalVisible(false)} />
                 </View>
               </View>
             </Modal>
@@ -86,8 +91,9 @@ const GameScreen = ({ onLogout }) => {
         ) : (
           <View>
             <Text>You've guessed it in {attemptCount} tries!</Text>
-            <Image source={{ uri: `https://picsum.photos/id/${generatedNumber}/100/100` }} style={styles.image} />
-            <Button title="New Game" onPress={handlePlayAgain} />
+            <Text>Congratulations!</Text>
+            <Image source={{ uri: `https://picsum.photos/id/${generatedNumber}/100/100` }} style={image} />
+            <CustomButton title="New Game" onPress={handlePlayAgain} />
           </View>
         )}
       </Card>
@@ -103,7 +109,7 @@ const styles = StyleSheet.create({
   },
   logoutButton: {
     position: 'absolute',
-    top: 10,
+    top: 50,
     right: 10,
   },
   input: {

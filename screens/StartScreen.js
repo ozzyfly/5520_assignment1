@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, Text, Button, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
 import Card from '../components/Card';
+import CustomInput from '../components/CustomInput'; 
+import CustomButton from '../components/CustomButton'; 
+
 
 const StartScreen = ({ onStart, onReset, userData }) => {
   const [name, setName] = useState(userData.name);
@@ -51,37 +54,17 @@ const StartScreen = ({ onStart, onReset, userData }) => {
   return (
     <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={styles.screen}>
       <Card>
-        <Text>Name</Text>
-        <TextInput 
-          style={styles.input} 
-          value={name} 
-          onChangeText={setName} 
-        />
-        {errors.name && <Text style={styles.errorText}>{errors.name}</Text>}
-
-        <Text>Email</Text>
-        <TextInput 
-          style={styles.input} 
-          value={email} 
-          onChangeText={setEmail} 
-        />
-        {errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
-
-        <Text>Phone Number</Text>
-        <TextInput 
-          style={styles.input} 
-          value={phoneNumber} 
-          onChangeText={setPhoneNumber} 
-        />
-        {errors.phoneNumber && <Text style={styles.errorText}>{errors.phoneNumber}</Text>}
+        <CustomInput label="Name" value={name} onChangeText={setName} error={errors.name} />
+        <CustomInput label="Email" value={email} onChangeText={setEmail} error={errors.email} />
+        <CustomInput label="Phone Number" value={phoneNumber} onChangeText={setPhoneNumber} error={errors.phoneNumber} />
 
         <View style={styles.checkboxContainer}>
           <Button title="I am not a robot" onPress={() => setCheckboxSelected(!checkboxSelected)} />
           <Text>{checkboxSelected ? '✅' : '❌'}</Text>
         </View>
 
-        <Button title="Reset" onPress={handleReset} />
-        <Button title="Start" onPress={handleStart} disabled={!checkboxSelected} />
+        <CustomButton title="Reset" onPress={handleReset} />
+        <CustomButton title="Start" onPress={handleStart} disabled={!checkboxSelected} />
       </Card>
     </KeyboardAvoidingView>
   );
