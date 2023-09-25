@@ -38,8 +38,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   button: {
-    backgroundColor: colors.secondary, 
-    color: colors.primary, 
+    backgroundColor: colors.primary, 
   },
   editButton: {
     marginRight: 10, 

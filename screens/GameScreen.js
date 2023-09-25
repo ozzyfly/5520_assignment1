@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 50,
     right: 10,
-    backgroundColor: colors.secondary,
+    backgroundColor: colors.primary,
     color: '#FFFFFF',
   },
   instructionText: {

@@ -5,7 +5,6 @@ import colors from '../colors';
 const CustomButton = ({ style, ...otherProps }) => (
   <View style={[styles.buttonContainer, style]}>
     <Button {...otherProps} color={colors.secondary} /> 
-    {/* Applied the secondary color to the button */}
   </View>
 );
 
