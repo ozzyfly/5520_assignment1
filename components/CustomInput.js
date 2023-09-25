@@ -19,9 +19,10 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     marginBottom: 20,
     padding: 10,
+    color: 'white',
   },
   errorText: {
-    color: 'red',
+    color: 'white',
     marginBottom: 10,
   },
 });

@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
+import colors from '../colors';
 
 const Card = ({ children }) => <View style={styles.card}>{children}</View>;
 
@@ -14,6 +15,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     padding: 20,
     margin: 10,
+    backgroundColor: colors.primary
   },
 });
 

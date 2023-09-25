@@ -1,6 +1,4 @@
-
 export default {
-    primary: '#4a90e2',
-    secondary: '#e94e77',
-  };
-  
+  primary: '#627D98', // Muted blue
+  secondary: '#D3B1A9',  // Soft pink
+};

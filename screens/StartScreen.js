@@ -3,6 +3,8 @@ import { View, Text, Button, StyleSheet, KeyboardAvoidingView, Platform } from '
 import Card from '../components/Card';
 import CustomInput from '../components/CustomInput'; 
 import CustomButton from '../components/CustomButton'; 
+import colors from '../colors';
+
 
 const StartScreen = ({ onStart, onReset, userData = { name: '', email: '', phoneNumber: '' } }) => {
   const [formData, setFormData] = useState(userData);
@@ -55,8 +57,8 @@ const StartScreen = ({ onStart, onReset, userData = { name: '', email: '', phone
         <CustomInput label="Phone Number" value={phoneNumber} onChangeText={(text) => setFormData(prev => ({ ...prev, phoneNumber: text }))} error={errors.phoneNumber} />
 
         <View style={styles.checkboxContainer}>
-          <Button title="I am not a robot" onPress={() => setCheckboxSelected(!checkboxSelected)} />
-          <Text>{checkboxSelected ? '✅' : '❌'}</Text>
+          <Button title="I am not a robot" color={colors.secondary} onPress={() => setCheckboxSelected(!checkboxSelected)} />
+          <Text style={{ color: checkboxSelected ? colors.primary : 'red', marginLeft: 10 }}>{checkboxSelected ? '✅' : '❌'}</Text>
         </View>
 
         <CustomButton title="Reset" onPress={handleReset} />
@@ -70,6 +72,7 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     justifyContent: 'center',
+    backgroundColor: colors.primary, // Applying background color
   },
   checkboxContainer: {
     flexDirection: 'row',
