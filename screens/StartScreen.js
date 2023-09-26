@@ -2,7 +2,8 @@ import React, { useState, useCallback } from 'react';
 import { View, Text, Button, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
 import Card from '../components/Card';
 import CustomInput from '../components/CustomInput'; 
-import CustomButton from '../components/CustomButton'; 
+import CustomButton from '../components/CustomButton';
+import Checkbox from '../components/Checkbox';
 import colors from '../colors';
 
 
@@ -57,8 +58,8 @@ const StartScreen = ({ onStart, onReset, userData = { name: '', email: '', phone
         <CustomInput label="Phone Number" value={phoneNumber} onChangeText={(text) => setFormData(prev => ({ ...prev, phoneNumber: text }))} error={errors.phoneNumber} />
 
         <View style={styles.checkboxContainer}>
-          <Button title="I am not a robot" color={colors.secondary} onPress={() => setCheckboxSelected(!checkboxSelected)} />
-          <Text style={{ color: checkboxSelected ? colors.primary : 'red', marginLeft: 10 }}>{checkboxSelected ? '✅' : '❌'}</Text>
+          <Checkbox isChecked={checkboxSelected} onToggle={() => setCheckboxSelected(!checkboxSelected)} label="I am not a robot" />
+          <Text style={{ color: checkboxSelected ? colors.primary : 'red', marginLeft: 10 }}></Text>
         </View>
 
         <CustomButton title="Reset" onPress={handleReset} />
