@@ -5,7 +5,7 @@ import CustomInput from '../components/CustomInput';
 import CustomButton from '../components/CustomButton';
 import Checkbox from '../components/Checkbox';
 import colors from '../colors';
-
+import GradientBackground from '../components/GradientBackground'; 
 
 const StartScreen = ({ onStart, onReset, userData = { name: '', email: '', phoneNumber: '' } }) => {
   const [formData, setFormData] = useState(userData);
@@ -51,7 +51,7 @@ const StartScreen = ({ onStart, onReset, userData = { name: '', email: '', phone
   }, [formData, onStart]);
 
   return (
-    <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.screen}>
+    <GradientBackground style={styles.screen}>
       <Card>
         <CustomInput label="Name" value={name} onChangeText={(text) => setFormData(prev => ({ ...prev, name: text }))} error={errors.name} />
         <CustomInput label="Email" value={email} onChangeText={(text) => setFormData(prev => ({ ...prev, email: text }))} error={errors.email} />
@@ -65,7 +65,7 @@ const StartScreen = ({ onStart, onReset, userData = { name: '', email: '', phone
         <CustomButton title="Reset" onPress={handleReset} />
         <CustomButton title="Start" onPress={handleStart} disabled={!checkboxSelected} />
       </Card>
-    </KeyboardAvoidingView>
+      </GradientBackground>
   );
 };
 
@@ -73,7 +73,6 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: colors.primary, // Applying background color
   },
   checkboxContainer: {
     flexDirection: 'row',

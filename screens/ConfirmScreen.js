@@ -3,10 +3,11 @@ import { View, Text, StyleSheet } from 'react-native';
 import Card from '../components/Card';
 import CustomButton from '../components/CustomButton'; 
 import colors from '../colors';
+import GradientBackground from '../components/GradientBackground'; 
 
 const ConfirmScreen = ({ userData: { name, email, phoneNumber }, onEdit, onConfirm }) => {
   return (
-    <View style={styles.screen}>
+    <GradientBackground style={styles.screen}>
       <Card>
         <Text style={styles.text}>Name: {name}</Text>
         <Text style={styles.text}>Email: {email}</Text>
@@ -17,7 +18,7 @@ const ConfirmScreen = ({ userData: { name, email, phoneNumber }, onEdit, onConfi
           <CustomButton title="Confirm" onPress={onConfirm} style={[styles.button, styles.confirmButton]} />
         </View>
       </Card>
-    </View>
+      </GradientBackground>
   );
 };
 
@@ -26,7 +27,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colors.primary, 
   },
   text: {
     color: '#FFFFFF', 

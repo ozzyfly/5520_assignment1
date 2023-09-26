@@ -3,6 +3,7 @@ import { View, Text, TextInput, Image, StyleSheet, Modal } from 'react-native';
 import Card from '../components/Card';
 import CustomButton from '../components/CustomButton'; 
 import colors from '../colors';
+import GradientBackground from '../components/GradientBackground'; 
 
 const GameScreen = ({ onLogout }) => {
   const [generatedNumber, setGeneratedNumber] = useState(generateRandom());
@@ -52,7 +53,7 @@ const GameScreen = ({ onLogout }) => {
   };
 
   return (
-    <View style={styles.screen}>
+    <GradientBackground style={styles.screen}>
       <CustomButton title="Logout" onPress={onLogout} style={logoutButton} />
 
       <Card>
@@ -99,8 +100,7 @@ const GameScreen = ({ onLogout }) => {
           </View>
         )}
       </Card>
-
-    </View>
+    </GradientBackground>
   );
 };
 
@@ -109,7 +109,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.primary,
   },
   logoutButton: {
     position: 'absolute',
