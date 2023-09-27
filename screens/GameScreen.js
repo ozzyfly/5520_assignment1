@@ -13,7 +13,7 @@ const GameScreen = ({ onLogout }) => {
   const [feedback, setFeedback] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
 
-  const { screen, logoutButton, input, image, buttonContainer, centeredView, modalView } = styles;
+  const {logoutButton, image, buttonContainer, centeredView, modalView } = styles;
 
 
   function generateRandom() {
@@ -55,7 +55,6 @@ const GameScreen = ({ onLogout }) => {
   return (
     <GradientBackground style={styles.screen}>
       <CustomButton title="Logout" onPress={onLogout} style={logoutButton} />
-
       <Card>
         {!isGuessCorrect ? (
           <>
@@ -76,7 +75,7 @@ const GameScreen = ({ onLogout }) => {
 
             <Modal
               animationType="slide"
-              transparent={true}
+              transparent={false}
               visible={modalVisible}
               onRequestClose={() => {
                 setModalVisible(false);

@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { View, Text, Button, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, Text, StyleSheet} from 'react-native';
 import Card from '../components/Card';
 import CustomInput from '../components/CustomInput'; 
 import CustomButton from '../components/CustomButton';
@@ -7,7 +7,7 @@ import Checkbox from '../components/Checkbox';
 import colors from '../colors';
 import GradientBackground from '../components/GradientBackground'; 
 
-const StartScreen = ({ onStart, onReset, userData = { name: '', email: '', phoneNumber: '' } }) => {
+const StartScreen = ({ onStart, userData = { name: '', email: '', phoneNumber: '' } }) => {
   const [formData, setFormData] = useState(userData);
   const [checkboxSelected, setCheckboxSelected] = useState(false);
   const [errors, setErrors] = useState({ name: '', email: '', phoneNumber: '' });
